@@ -67,16 +67,16 @@ public class Triangle extends GeometricObject
 	//return the perimeter
 	public double getPerimeter()
 	{
-		return ((sideA + sideB + sideC) / 2);
+		return sideA + sideB + sideC;
 	}
 
 	//return the area
 	public double getArea()
 	{
-		double p = getPerimeter();
+		double s = getPerimeter() / 2;
 
-		return (Math.sqrt( (p * ( (p - sideA) * (p - sideB) * 
-			(p - sideC) ) ) ) );
+		return (Math.sqrt( (s * ( (s - sideA) * (s - sideB) * 
+			(s - sideC) ) ) ) );
 	}
 
 
