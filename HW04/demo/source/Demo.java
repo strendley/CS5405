@@ -91,13 +91,13 @@ public class Demo extends Application
             //if it starts with c, show the circle object
             if(str.toLowerCase().startsWith("c"))
             {
-                root.getChildren().removeAll(textField,circle,rectangle); //clear the VBox of objects
+                root.getChildren().removeAll(textField,circle,rectangle); //clear the pane of objects
                 root.getChildren().addAll(textField,circle); //add the relevant objects back in
             }
 
             else if (str.toLowerCase().startsWith("r"))
             {
-                root.getChildren().removeAll(textField,circle,rectangle); //clear the VBox of objects
+                root.getChildren().removeAll(textField,circle,rectangle); //clear the pane of objects
                 root.getChildren().addAll(textField,rectangle); //add the relevant objects back in
                 
             }
@@ -109,7 +109,7 @@ public class Demo extends Application
             textField.clear(); //reset the text
         });      
 
-        //add the textfield to the VBox
+        //add the textfield & label to the pane
         root.getChildren().addAll(textField,label);
 
         //return the created textfield
