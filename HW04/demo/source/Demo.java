@@ -101,6 +101,11 @@ public class Demo extends Application
                 root.getChildren().addAll(textField,rectangle); //add the relevant objects back in
                 
             }
+            else
+            {
+                root.getChildren().removeAll(textField,circle,rectangle);
+                root.getChildren().addAll(textField);
+            }
             textField.clear(); //reset the text
         });      
 
