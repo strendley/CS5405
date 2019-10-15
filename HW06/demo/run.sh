@@ -2,5 +2,5 @@
 
 echo "Running Java File..."
 javac -d . source/*.java
-jar -cfm Demo.java m.txt .
-java -jar Demo.java
+jar -cfm Demo.jar m.txt .
+java -jar Demo.jar
