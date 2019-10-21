@@ -53,8 +53,8 @@ public class Demo extends Application
         scene = new Scene(root, 600, 600); // Create a scene for stage
         stage.setScene(scene); // Place the scene in the stage
         setUpButtons();
-        //setUpAuthor();
-        setUpDemo();
+        setUpAuthor();
+        //setUpDemo();
         stage.show(); // Display the stage
         stage.setTitle("HW07 Demo"); // Set the stage title
     }
