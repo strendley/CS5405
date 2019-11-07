@@ -42,7 +42,7 @@ public class Demo extends Application
     Path path;    
     LineTo lineTo;   
     MoveTo moveTo;
-    int numLines = 0;
+    int lineCount = 0;
 
     @Override // Override the start method in the Application class
     public void start(Stage stage) 
@@ -154,19 +154,19 @@ public class Demo extends Application
 
     public void setUpDemo()
     {
-        if(numLines >= 2)
-            return;
-            
+        //set up initial vars
         draw=true;
         first=true;
         notDone=true;    
         x=0;
         y=0;     
+        lineCount = 0;
 
         demoPane = new Pane();
-        Label label = new Label("Click once to begin drawing a line. Double click to end the line. Once two polylines have been created, no more can be added.");
+        Label label = new Label("Click once to begin drawing a line. \nDouble click to end the line. Once two polylines have been created, \nno more can be added.");
         label.setWrapText(true);
 
+        //add the label to explain demo
         demoPane.getChildren().add(label);
 
         path = new Path();     
@@ -174,8 +174,8 @@ public class Demo extends Application
         moveTo = new MoveTo();    
 
         path.getElements().add(new MoveTo(x,y));        
-        path.setStrokeWidth(2);        
-        path.setStroke(Color.BLUE);            
+
+        //set up the mouse events          
         scene.setOnMouseMoved(mouseHandler);        
         scene.setOnMouseClicked(mouseEvent->{            
             // freeze the point and get to a new point            
@@ -183,23 +183,32 @@ public class Demo extends Application
             { 
                 if (mouseEvent.getClickCount()==1)            
                 {       
-                    demoPane.getChildren().remove(label);         
+                    //remove the label when drawing begins
+                    demoPane.getChildren().remove(label); 
+
                     first=false;                
                     x = (int) mouseEvent.getX();
                     y = (int) mouseEvent.getY();           
                     demoPane.getChildren().remove(path);                
                     lineTo.setX(x);
-                    lineTo.setY(y);                
+                    lineTo.setY(y);    
+
                     path = new Path();                
                     path.getElements().add(new MoveTo(x,y));
+
                     // path initialization
-                    path.setStrokeWidth(2);                
-                    path.setStroke(Color.BLUE);                
+                    path.setStrokeWidth(2);   
+                    if(lineCount == 0)             
+                        path.setStroke(Color.GREEN);
+                    
+                    else             
+                        path.setStroke(Color.RED);
+
                     // add the start point of the path                
                     demoPane.getChildren().add(path);
-                    numLines++;
                 } 
-            }            
+            }          
+            //if it is not the first line, attach the line to the previous line  
             else if (mouseEvent.getClickCount()==1)                
                 {   
                     x = (int) mouseEvent.getX();                    
@@ -210,18 +219,39 @@ public class Demo extends Application
                     moveTo.setX(x);                    
                     moveTo.setY(y);                    
                     if (draw)                    
-                    {   
-                        //path.getElements().add(moveTo);                        
+                    {                         
                         path.getElements().add(new LineTo(x,y));                    
                     }                
-                }            
-                if (mouseEvent.getClickCount()>1)               
-                    draw=false;            
+                }     
+                //if double click, stop drawing       
+                if (mouseEvent.getClickCount() > 1)  
+                {             
+                    draw=false;
+                    lineCount++;            
+                }
+
+                if(draw == false && mouseEvent.getClickCount() == 1 && lineCount < 2)
+                {
+                    first = true;
+                    draw = true;
+                    path = new Path();  
+                    
+                    path.setStrokeWidth(2);                
+                    path.setStroke(Color.RED); 
+                    
+                    lineTo = new LineTo(); 
+                    moveTo = new MoveTo();    
+            
+                    path.getElements().add(new MoveTo(x,y));
+
+                }
         });
         
+        //add the demo pane to the root
         root.getChildren().add(demoPane);
     }
        
+    //mouse event for adding lines on single click 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() 
     {
         @Override        
