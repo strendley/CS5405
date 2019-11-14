@@ -30,6 +30,9 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import static java.lang.Math.*;
+
+import java.util.Random;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -52,6 +55,8 @@ public class Demo extends Application
     int pos = 0;
     Boolean playing=false;
     Boolean reversing=false;
+    int numBlades = 4;
+    double angle;
     //Slider slider;
 
     @Override // Override the start method in the Application class
@@ -166,6 +171,8 @@ public class Demo extends Application
 
     public void setUpDemo()
     {
+        angle = floor(360 / numBlades);
+
         //create a new pane for the demo
         demoPane = new Pane();
 
@@ -184,11 +191,11 @@ public class Demo extends Application
         innerCircle.setStroke(Color.BLACK);
         innerCircle.setStrokeWidth(3);
 
-        //set up the default fan to have 4 blades
-        arc = new Arc[4];
+        //set up the default fan
+        arc = new Arc[numBlades];
         for(int i = 0; i < arc.length; i++)
         {
-            arc[i] = new Arc(outerCircle.getCenterX(), outerCircle.getCenterY(),200,200,i*90 + 20, 35);
+            arc[i] = new Arc(outerCircle.getCenterX(), outerCircle.getCenterY(),200,200,i*angle + 20, 35);
             arc[i].setFill(Color.RED);
             arc[i].setStroke(Color.BLACK);
             arc[i].setStrokeWidth(2);
@@ -212,10 +219,11 @@ public class Demo extends Application
         demoButtons.setSpacing(120.0);
         demoButtons.setPadding(new Insets(500,10,10,65));
 
-        //create the start buttons
+        //create the start button
         ImageView start = new ImageView(new Image("images/play.png"));
         start.setFitHeight(50);
         start.setFitWidth(50);
+        
         Button btnStart = new Button("",start);
         btnStart.setMaxWidth(100);
 
@@ -224,8 +232,8 @@ public class Demo extends Application
             @Override
             public void handle(ActionEvent event) 
             {
-                if(playing==false)
-                    startAnimation();
+                if(playing==false) //if the fan isn't spinning
+                    startAnimation(); //start the animation
             }
         });
 
@@ -233,83 +241,96 @@ public class Demo extends Application
         ImageView stop = new ImageView(new Image("images/pause.png"));
         stop.setFitHeight(50);
         stop.setFitWidth(50);
-        Button btnPause = new Button("",stop);
 
+        Button btnPause = new Button("",stop);
         btnPause.setMaxWidth(100);
+
         btnPause.setOnAction(new EventHandler<ActionEvent>() 
         {
             @Override
             public void handle(ActionEvent event) 
             {
-                pauseAnimation();
+                pauseAnimation(); //stop the animation
             }
         });
 
+        //create reverse button
         ImageView reverse = new ImageView(new Image("images/reverse.png"));
         reverse.setFitHeight(50);
         reverse.setFitWidth(50);
-        Button btnReverse = new Button("",reverse);
 
+        Button btnReverse = new Button("",reverse);
         btnReverse.setMaxWidth(100);
+
         btnReverse.setOnAction(new EventHandler<ActionEvent>() 
         {
             @Override
             public void handle(ActionEvent event) 
             {
-                if(reversing==false)
-                    reversing=true;
+                if(reversing==false) //if it is not going in the reverse direction
+                    reversing=true; //reverse it
                 else
-                    reversing=false;
+                    reversing=false; //if it is going in the reverse direction, un-reverse it
             }
         });
 
         //add the buttons to the horizontal box pane
         demoButtons.getChildren().addAll(btnStart, btnPause, btnReverse);
 
-        //add the button box to the root pane
+        //add the button box to the demo pane
         demoPane.getChildren().add(demoButtons);
        
     }
 
     public void startAnimation()
     {
+        //set up an animation timeline
         timeline = new Timeline(new KeyFrame(Duration.millis(50), e->spinFan()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-        playing=true;
+        timeline.setCycleCount(Timeline.INDEFINITE); //make it only stop on user input
+        timeline.play(); //start the timeline
+        playing=true; //notify that it is currently spinning
     }
 
     public void pauseAnimation()
     {
-        timeline.pause();
-        playing=false;
+        timeline.pause(); //stop the timeline
+        playing=false; //notify that it is no longer spinning
     }
 
     public void spinFan()
     {
-        demoPane.getChildren().removeAll(arc);
+        demoPane.getChildren().removeAll(arc); //remove the arc from the pane
 
-        if(reversing==false)
-            pos=pos+10;
+        if(reversing==false) //if it is not going in the reverse direction
+            pos=pos+10;  //increase the blade position to 10 degrees in the positive direction
         else
-            pos=pos-10;
+            pos=pos-10; //decrease the blade position to 10 degress in the negative direction
 
-        arc = new Arc[4];
+        arc = new Arc[numBlades];
         for(int i = 0; i < arc.length; i++)
         {
-            arc[i] = new Arc(outerCircle.getCenterX(), outerCircle.getCenterY(),200,200,i*90 - pos, 35);
-            arc[i].setFill(Color.RED);
+            //create a new blade; public Arc(double centerX, double centerY, double radiusX, double radiusY, double startAngle, double length)
+            arc[i] = new Arc(outerCircle.getCenterX(), outerCircle.getCenterY(),200,200,i*angle - pos, 35);
+            
+            //fill the blade with various graphic coloring options
+            arc[i].setFill(getRandomColor());
             arc[i].setStroke(Color.BLACK);
             arc[i].setStrokeWidth(2);
             arc[i].setType(ArcType.ROUND);
         }
 
+        //add the arc back to the demo pane
         demoPane.getChildren().addAll(arc);
     }
 
-    
+    public Color getRandomColor()
+    {
+        Random number = new Random();
 
-        
+        Color color = Color.rgb(number.nextInt(255),number.nextInt(255),number.nextInt(255));
+        return color;
+    }
+    
     /**
      * The main method is only needed for the IDE with limited
      * JavaFX support. Not needed for running from the command line.
