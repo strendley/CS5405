@@ -44,7 +44,7 @@ A Java program that uses polyLine to free draw lines in the scene.
 ### HW09: 
 A Java program that uses animation to simulate a spinning fan. 
 
-## HW10: 
+### HW10: 
 A continuation of HW07 and HW09, in which the user uses sliders to adjust the speed and number of blades on an animated fan.
 
 
