@@ -3,6 +3,18 @@
 ## Course Overview: 
 Fundamentals of Java Swing Foundation Classes, Java System Language Specifics, Graphical User Interfaces, Images, Audio, Animation, Networking, and Threading. Visualization of Algorithms. GUI Elements include Event Driven Programming, Interaction with Mouse and Keyboard, Window Managers, Frames, Panels, Dialog Boxes, and Borders.
 
+## Requirements
+* JavaSDK
+* JavaFX 8
+
+To run the programs, either use the run.sh script or execute the following commands via command line:
+```
+javac -d . source/*.java
+jar -cfm Demo.jar m.txt .
+java -jar Demo.jar
+```
+
+
 ## Repository Layout
 
 ### HW01:
