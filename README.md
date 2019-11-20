@@ -17,24 +17,15 @@ java -jar Demo.jar
 
 ## Repository Layout
 
-HW01: A basic Java program that prompts the user for the number of sides and the length of a polygon and produces the area.
-
-HW02: A basic Java program that prompts the user for the side length, color, and filled property of a triangle and produces the area and perimeter.
-
-HW03: A Java program that produces an executable showing a filled circle with the programmer's name.
-
-HW04: A Java program that produces an executable that prompts the user and displays a rectangle or circle depending on user input.
-
-HW05: A Java program that adjusts a rectangle based on the dimensions of the scene.
-
-HW06: A Java program that demonstrates the size and rotation properties of an image.
-
-HW07: A Java program with a slider that adjusts the number of blades on a fan.
-
-HW08: A Java program that uses polyLine to free draw lines in the scene.
-
-HW09: A Java program that uses animation to simulate a spinning fan. 
-
-HW10: A continuation of HW07 and HW09, in which the user uses sliders to adjust the speed and number of blades on an animated fan.
+1. HW01: A basic Java program that prompts the user for the number of sides and the length of a polygon and produces the area.
+2. HW02: A basic Java program that prompts the user for the side length, color, and filled property of a triangle and produces the area and perimeter.
+3. HW03: A Java program that produces an executable showing a filled circle with the programmer's name.
+4. HW04: A Java program that produces an executable that prompts the user and displays a rectangle or circle depending on user input.
+5. HW05: A Java program that adjusts a rectangle based on the dimensions of the scene.
+6. HW06: A Java program that demonstrates the size and rotation properties of an image.
+7. HW07: A Java program with a slider that adjusts the number of blades on a fan.
+8. HW08: A Java program that uses polyLine to free draw lines in the scene.
+9. HW09: A Java program that uses animation to simulate a spinning fan. 
+10. HW10: A continuation of HW07 and HW09, in which the user uses sliders to adjust the speed and number of blades on an animated fan.
 
 
