@@ -18,7 +18,7 @@ java -jar Demo.jar
 ## Repository Layout
 
 1. HW01: Prompts the user for the number of sides and the length of a polygon and produces the area.
-2. HW02: Prompts the user for the side length, color, and filled property of a triangle and produces the area and perimeter.
+2. HW02: Prompts the user for the propertie of a triangle and produces the area and perimeter.
 3. HW03: Produces an executable showing a filled circle with the programmer's name.
 4. HW04: Produces an executable that prompts the user and displays a rectangle or circle depending on user input.
 5. HW05: Adjusts a rectangle based on the dimensions of the scene.
