@@ -3,7 +3,7 @@
 
 ### To Run The Program:
 ```
-java -d . source/Demo.java
+javac -d . source/Demo.java
 java code.Demo
 ```
 
